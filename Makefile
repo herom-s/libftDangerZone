@@ -28,7 +28,15 @@ TEST_BINARY = libft_tests
 INCLUDES = -I$(LIBFT_DIR) -I$(MUNIT_DIR)
 
 # Test function names (for individual tests)
-TEST_FUNCTIONS = isalpha isdigit isalnum isascii isprint strlen memset
+TEST_FUNCTIONS = isalpha \
+				 isdigit \
+				 isalnum \
+				 isascii \
+				 isprint \
+				 strlen \
+				 memset \
+				 strchr \
+				 strrchr
 
 # ============================================================================
 # Phony targets
