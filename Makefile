@@ -45,7 +45,8 @@ TEST_FUNCTIONS = isalpha \
 				 strlcat \
 				 toupper \
 				 tolower \
-				 strncmp
+				 strncmp \
+				 memchr
 
 # ============================================================================
 # Phony targets
