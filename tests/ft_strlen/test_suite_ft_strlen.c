@@ -23,7 +23,6 @@ static MunitResult test_ft_strlen_small_str(const MunitParameter params[], void*
 	munit_assert_size(strlen("abcd"), ==,ft_strlen("abcd"));
     return MUNIT_OK;
 }
-
 /*
 static MunitResult test_ft_strlen_null_segfault(const MunitParameter params[], void* data) {
     (void) params;
@@ -66,7 +65,6 @@ static MunitResult test_ft_strlen_null_segfault(const MunitParameter params[], v
     return MUNIT_OK;
 }
 */
-
 /*
 static MunitResult test_ft_strlen_big_str(const MunitParameter params[], void* data) {
 	char	*big_str;

@@ -44,7 +44,8 @@ TEST_FUNCTIONS = isalpha \
 				 strlcpy \
 				 strlcat \
 				 toupper \
-				 tolower
+				 tolower \
+				 strncmp
 
 # ============================================================================
 # Phony targets

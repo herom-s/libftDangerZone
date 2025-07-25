@@ -18,6 +18,7 @@ extern const MunitSuite test_suite_ft_strlcpy;
 extern const MunitSuite test_suite_ft_strlcat;
 extern const MunitSuite test_suite_ft_toupper;
 extern const MunitSuite test_suite_ft_tolower;
+extern const MunitSuite test_suite_ft_strncmp;
 
 int main(int argc, char* argv[]) {
     /* Define the array on the stack (or heap if needed) */
@@ -38,6 +39,7 @@ int main(int argc, char* argv[]) {
         test_suite_ft_strlcat,
         test_suite_ft_toupper,
         test_suite_ft_tolower,
+        test_suite_ft_strncmp,
         { NULL, NULL, NULL, 1, MUNIT_SUITE_OPTION_NONE }
     };
 
