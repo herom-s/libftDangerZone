@@ -5,6 +5,7 @@
 # Compiler settings
 CC = cc
 CFLAGS = -Wall -Wextra -std=c99 -g
+LDFLAGS = -lbsd
 
 # Directories
 LIBFT_DIR = ../libft
@@ -36,7 +37,14 @@ TEST_FUNCTIONS = isalpha \
 				 strlen \
 				 memset \
 				 strchr \
-				 strrchr
+				 strrchr \
+				 bzero \
+				 memcpy \
+				 memmove \
+				 strlcpy \
+				 strlcat \
+				 toupper \
+				 tolower
 
 # ============================================================================
 # Phony targets
@@ -48,21 +56,26 @@ TEST_FUNCTIONS = isalpha \
 # Main targets
 # ============================================================================
 
-all: setup $(LIBFT_LIB) $(TEST_BINARY)
+all: $(LIBFT_LIB) $(TEST_BINARY)
 
 # ============================================================================
 # Setup and dependencies
 # ============================================================================
 
-setup: deps
-
-deps:
+# Setup dependencies (only run when needed)
+$(MUNIT_DIR)/munit.c:
 	@echo "Setting up dependencies..."
 	@mkdir -p $(DEPS_DIR)
-	@if [ ! -d "$(MUNIT_DIR)" ]; then \
-		echo "Cloning munit..."; \
-		git clone https://github.com/nemequ/munit.git $(MUNIT_DIR); \
-	fi
+	@echo "Cloning munit..."
+	@git clone https://github.com/nemequ/munit.git $(MUNIT_DIR)
+
+# Munit header depends on munit source
+$(MUNIT_DIR)/munit.h: $(MUNIT_DIR)/munit.c
+
+# Legacy setup target for manual use
+setup: $(MUNIT_DIR)/munit.c
+
+deps: setup
 
 # ============================================================================
 # Build rules
@@ -88,12 +101,12 @@ $(LIBFT_DIR)/%.o: $(LIBFT_DIR)/%.c
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -c $< -o $@
 
 # Compile test source files
-$(TEST_DIR)/%.o: $(TEST_DIR)/%.c
+$(TEST_DIR)/%.o: $(TEST_DIR)/%.c $(MUNIT_DIR)/munit.h
 	@echo "Compiling test $<..."
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 # Compile test source files in subdirectories
-$(TEST_DIR)/*/%.o: $(TEST_DIR)/*/%.c
+$(TEST_DIR)/*/%.o: $(TEST_DIR)/*/%.c $(MUNIT_DIR)/munit.h
 	@echo "Compiling test $<..."
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
